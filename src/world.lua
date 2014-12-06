@@ -6,14 +6,14 @@ m.require({"event"}, function(event)
     self.world =  love.physics.newWorld(0, 9.81 * love.physics.getMeter())
     love.physics.setMeter(64)
     self.world:setCallbacks(
-      function(a, b, coll) self:startContact(a, b, coll) end,
-      function(a, b, coll) self:endContact  (a, b, coll) end,
-      function(a, b, coll) self:preSolve    (a, b, coll) end,
-      function(a, b, coll) self:postSolve   (a, b, coll) end
+      function(a, b, contact) self:startContact(a, b, contact) end,
+      function(a, b, contact) self:endContact  (a, b, contact) end,
+      function(a, b, contact) self:preSolve    (a, b, contact) end,
+      function(a, b, contact) self:postSolve   (a, b, contact) end
     )
   end
 
-  function World:startContact(a, b, coll)
+  function World:startContact(a, b, contact)
     local a = a:getUserData()
     local b = b:getUserData()
 
@@ -27,11 +27,14 @@ m.require({"event"}, function(event)
         thing_on_ground = a
       end
 
-      thing_on_ground:set_on_ground(true)
+      contact_x, contact_y = contact:getNormal()
+      if contact_x == -0 and contact_y == 1 then
+        thing_on_ground:set_on_ground(true)
+      end
     end
   end
 
-  function World:endContact(a, b, coll)
+  function World:endContact(a, b, contact)
     local a = a:getUserData()
     local b = b:getUserData()
 
@@ -45,15 +48,15 @@ m.require({"event"}, function(event)
         thing_on_ground = a
       end
 
-      thing_on_ground:set_on_ground(false)
+      contact_x, contact_y = contact:getNormal()
+      if contact_x == 0 and contact_y == 1 then
+        thing_on_ground:set_on_ground(false)
+      end
     end
   end
 
-  function World:preSolve(a, b, coll)
-  end
-
-  function World:postSolve(a, b, coll)
-  end
+  function World:preSolve(a, b, contact) end
+  function World:postSolve(a, b, contact) end
 
   event:on("load", function()
     knight.module("Game").provide("world", World:new().world)
