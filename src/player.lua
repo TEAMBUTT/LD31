@@ -31,8 +31,9 @@ knight.module("Game")
   end
 
   function Player:bind_events()
-    self:on("update", function(dt) self:update(dt) end)
-    self:on("draw", function() self:draw() end)
+    event.on("update", function(dt) self:update(dt) end)
+    event.on("draw", function(e) self:draw(e) end)
+    event.on("keypressed", function(key) self:key_pressed(key) end)
   end
 
   function Player:update(dt)
@@ -52,6 +53,16 @@ knight.module("Game")
     local x, y = self.body:getWorldCenter()
 
     self.anim:draw(x-16, y-16)
+  end
+
+  function Player:key_pressed(key)
+    if key == 'up' then
+      self:jump()
+    end
+  end
+
+  function Player:jump()
+    self.body:applyLinearImpulse(0, -75)
   end
 
   return Player:new()
