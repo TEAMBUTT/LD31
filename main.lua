@@ -18,6 +18,7 @@ require 'entity'
 require 'map'
 require 'ball'
 require 'misc_objects'
+require 'platform'
 
 knight.module("Game").require({"event", "palette"}, function(event, palette)
   function love.load()
