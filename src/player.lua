@@ -34,6 +34,12 @@ knight.module("Game")
 
   function Player:update(dt)
     self.anim:update(dt)
+
+    if love.keyboard.isDown("right") then
+      self.body:applyForce(50, 0)
+    elseif love.keyboard.isDown("left") then
+      self.body:applyForce(-50, 0)
+    end
   end
 
   function Player:draw(e)

@@ -27,16 +27,6 @@ knight.module("Game").component("ball", {"event", "world", "palette"}, function(
     love.graphics.setColor(unpack(palette.lightred))
     love.graphics.circle("fill", ball.body:getX(), ball.body:getY(), ball.shape:getRadius())
   end)
-
-  event.on("update", function (dt)
-    if love.keyboard.isDown("right") then
-      ball.body:applyForce(400, 0)
-    elseif love.keyboard.isDown("left") then
-      ball.body:applyForce(-400, 0)
-    elseif love.keyboard.isDown("up") then
-      ball.body:setPosition(1024/2, 768/2)
-    end
-  end)
 end)
 
 knight.module("Game").component("map", {"event", "world", "palette"}, function(event, world, palette)
