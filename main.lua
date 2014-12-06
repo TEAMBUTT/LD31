@@ -2,6 +2,7 @@ package.path = package.path .. ';./src/?.lua;./src/?/init.lua'
 knight = require 'vendor.knight'
 class = require 'vendor.middleclass'
 _ = require 'vendor.underscore'
+require 'vendor.AnAL'
 
 -- Some global helper methods
 inspect = require 'vendor.inspect'
