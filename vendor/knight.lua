@@ -17,6 +17,26 @@ function knight.module(name)
   local dependencies_met
   local get_dependencies
 
+  -- require creates an anonymous component
+  modules[name].require = function(dependencies, callback)
+    table.insert(components, {
+      dependencies=dependencies,
+      constructor=callback
+    })
+    dependency_sweep()
+    return module
+  end
+
+  modules[name].provide = function(name, value)
+    components[name] = {
+      dependencies={},
+      result=value,
+      loaded=true
+    }
+    dependency_sweep()
+    return module
+  end
+
   modules[name].component = function(name, dependencies, constructor)
     components[name] = {
       dependencies=dependencies,
