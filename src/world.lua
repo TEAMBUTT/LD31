@@ -1,0 +1,15 @@
+local m = knight.module("Game")
+m.require({"event"}, function(event)
+  event.on("load", function()
+    love.physics.setMeter(64)
+
+    local world = love.physics.newWorld(0, 9.81 * love.physics.getMeter())
+
+    knight.module("Game").provide("world", world)
+  end)
+end)
+m.require({"event", "world"}, function(event, world)
+  event.on("update", function(dt)
+    world:update(dt)
+  end)
+end)
