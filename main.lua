@@ -14,6 +14,7 @@ require 'event'
 require 'world'
 require 'palette'
 require 'player'
+require 'entity'
 
 knight.module("Game").component("ball", {"event", "world", "palette"}, function(event, world, palette)
   local ball = {}
