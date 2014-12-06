@@ -63,7 +63,7 @@ knight.module("Game")
   end
 
   function Player:jump()
-    self.body:applyLinearImpulse(0, -20)
+    self.body:applyLinearImpulse(0, -25)
   end
 
   return Player:new()
