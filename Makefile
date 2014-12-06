@@ -1,7 +1,9 @@
 .PHONY : run spec coverage clean
 
+LOVE?=love
+
 run:
-	${LOVEPATH} ./
+	${LOVE} ./
 
 spec:
 	busted ./spec
