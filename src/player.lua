@@ -31,9 +31,9 @@ knight.module("Game")
   end
 
   function Player:bind_events()
-    event.on("update", function(dt) self:update(dt) end)
-    event.on("draw", function(e) self:draw(e) end)
-    event.on("keypressed", function(key) self:key_pressed(key) end)
+    event:on("update", function(dt) self:update(dt) end)
+    event:on("draw", function(e) self:draw(e) end)
+    event:on("keypressed", function(key) self:key_pressed(key) end)
   end
 
   function Player:update(dt)

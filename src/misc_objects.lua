@@ -11,7 +11,7 @@ knight
   block2.shape = love.physics.newRectangleShape(0, 0, 100, 10)
   block2.fixture = love.physics.newFixture(block2.body, block2.shape, 2)
 
-  event.on("draw", function(e)
+  event:on("draw", function(e)
     love.graphics.setColor(unpack(palette.grey1))
     love.graphics.polygon("fill", block1.body:getWorldPoints(block1.shape:getPoints()))
     love.graphics.polygon("fill", block2.body:getWorldPoints(block2.shape:getPoints()))

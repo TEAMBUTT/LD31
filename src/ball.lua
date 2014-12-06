@@ -7,7 +7,7 @@ knight
   ball.fixture = love.physics.newFixture(ball.body, ball.shape, 1)
   ball.fixture:setRestitution(0.9)
 
-  event.on("draw", function(e)
+  event:on("draw", function(e)
     love.graphics.setColor(unpack(palette.lightred))
     love.graphics.circle("fill", ball.body:getX(), ball.body:getY(), ball.shape:getRadius())
   end)

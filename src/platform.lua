@@ -8,8 +8,8 @@ knight
     self.shape = love.physics.newRectangleShape(w/2, h/2, w, h, 0)
     self.fixture = love.physics.newFixture(self.body, self.shape)
 
-    event.on("update", function(dt) self:update(dt) end)
-    event.on("draw", function(e) self:draw(e) end)
+    event:on("update", function(dt) self:update(dt) end)
+    event:on("draw", function(e) self:draw(e) end)
   end
 
   function Platform:draw(e)

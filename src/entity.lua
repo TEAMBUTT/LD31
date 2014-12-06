@@ -15,7 +15,7 @@ knight.module("Game")
   end
 
   function Entity:on(name, func)
-    event.on(name, func)
+    event:on(name, func)
     Entity.on_destroy(self, function() event.off(name, func) end)
   end
 

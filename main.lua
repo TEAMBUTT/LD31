@@ -10,6 +10,7 @@ function p(val)
   print(inspect(val))
 end
 
+require 'event_listener'
 require 'event'
 require 'world'
 require 'palette'
@@ -25,40 +26,40 @@ knight.module("Game").require({"event", "palette"}, function(event, palette)
   function love.load()
     love.graphics.setBackgroundColor(unpack(palette.cyan))
     love.window.setMode(1024, 768)
-    event.trigger("load")
+    event:trigger("load")
   end
 
   function love.draw()
-    event.trigger("draw")
+    event:trigger("draw")
   end
 
   function love.update(dt)
-    event.trigger("update", dt)
+    event:trigger("update", dt)
   end
 
   function love.keypressed(key)
-    event.trigger("keypressed", key)
+    event:trigger("keypressed", key)
   end
 
   function love.keyreleased(key)
-    event.trigger("keyreleased", key)
+    event:trigger("keyreleased", key)
     if key == 'escape' then love.event.quit() end
   end
 
   function love.mousepressed(x, y, button)
-    event.trigger("mousepressed", x, y, button)
+    event:trigger("mousepressed", x, y, button)
   end
 
   function love.mousereleased(x, y, button)
-    event.trigger("mousereleased", x, y, button)
+    event:trigger("mousereleased", x, y, button)
   end
 
   function love.focus(focus)
-    event.trigger("focus", focus)
+    event:trigger("focus", focus)
   end
 
   function love.quit()
-    event.trigger("quit")
+    event:trigger("quit")
   end
 end)
 
