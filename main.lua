@@ -10,8 +10,9 @@ end
 
 require 'event'
 require 'world'
+require 'palette'
 
-knight.module("Game").component("ball", {"event", "world"}, function(event, world)
+knight.module("Game").component("ball", {"event", "world", "palette"}, function(event, world, palette)
   local ball = {}
   ball.body = love.physics.newBody(world, 650/2, 650/2, "dynamic")
   ball.shape = love.physics.newCircleShape(20)
@@ -19,7 +20,7 @@ knight.module("Game").component("ball", {"event", "world"}, function(event, worl
   ball.fixture:setRestitution(0.9)
 
   event.on("draw", function(e)
-    love.graphics.setColor(193, 47, 14)
+    love.graphics.setColor(unpack(palette.lightred))
     love.graphics.circle("fill", ball.body:getX(), ball.body:getY(), ball.shape:getRadius())
   end)
 
@@ -34,7 +35,7 @@ knight.module("Game").component("ball", {"event", "world"}, function(event, worl
   end)
 end)
 
-knight.module("Game").component("map", {"event", "world"}, function(event, world)
+knight.module("Game").component("map", {"event", "world", "palette"}, function(event, world, palette)
   -- just a piece of ground for now
   local ground = {}
   ground.body = love.physics.newBody(world, 650/2, 650-50/2)
@@ -42,12 +43,12 @@ knight.module("Game").component("map", {"event", "world"}, function(event, world
   ground.fixture = love.physics.newFixture(ground.body, ground.shape)
 
   event.on("draw", function(e)
-    love.graphics.setColor(72, 160, 14)
+    love.graphics.setColor(unpack(palette.green))
     love.graphics.polygon("fill", ground.body:getWorldPoints(ground.shape:getPoints()))
   end)
 end)
 
-knight.module("Game").component("misc_objects", {"event", "world"}, function(event, world)
+knight.module("Game").component("misc_objects", {"event", "world", "palette"}, function(event, world, palette)
   local block1 = {}
   block1.body = love.physics.newBody(world, 200, 550, "dynamic")
   block1.shape = love.physics.newRectangleShape(0, 0, 50, 100)
@@ -59,15 +60,15 @@ knight.module("Game").component("misc_objects", {"event", "world"}, function(eve
   block2.fixture = love.physics.newFixture(block2.body, block2.shape, 2)
 
   event.on("draw", function(e)
-    love.graphics.setColor(50, 50, 50)
+    love.graphics.setColor(unpack(palette.grey1))
     love.graphics.polygon("fill", block1.body:getWorldPoints(block1.shape:getPoints()))
     love.graphics.polygon("fill", block2.body:getWorldPoints(block2.shape:getPoints()))
   end)
 end)
 
-knight.module("Game").require({"event"}, function(event)
+knight.module("Game").require({"event", "palette"}, function(event, palette)
   function love.load()
-    love.graphics.setBackgroundColor(104, 136, 248)
+    love.graphics.setBackgroundColor(unpack(palette.cyan))
     love.window.setMode(650, 650)
     event.trigger("load")
   end
