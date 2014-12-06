@@ -89,6 +89,7 @@ knight.module("Game").require({"event", "palette"}, function(event, palette)
 
   function love.keyreleased(key)
     event.trigger("keyreleased", key)
+    if key == 'escape' then love.event.quit() end
   end
 
   function love.mousepressed(x, y, button)
