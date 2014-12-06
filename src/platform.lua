@@ -1,15 +1,16 @@
 knight
 .module("Game")
-.component("Platform", {"event", "world", "palette"}, function(event, world, palette)
-  local Platform = class("Platform")
+.component("Platform", {"Entity", "world", "palette"}, function(Entity, world, palette)
+  local Platform = class("Platform", Entity)
 
   function Platform:initialize(x, y, w, h)
+    Entity.initialize(self)
     self.body = love.physics.newBody(world, x, y)
     self.shape = love.physics.newRectangleShape(w/2, h/2, w, h, 0)
     self.fixture = love.physics.newFixture(self.body, self.shape)
 
-    event:on("update", function(dt) self:update(dt) end)
-    event:on("draw", function(e) self:draw(e) end)
+    self:on("update", function(dt) self:update(dt) end)
+    self:on("draw", function(e) self:draw(e) end)
   end
 
   function Platform:draw(e)
