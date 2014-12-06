@@ -17,7 +17,10 @@ knight.module("Game")
     Entity.initialize(self)
     self.body = love.physics.newBody(world, 640/3, 640/3, "dynamic")
     self.body:setFixedRotation(true)
+    self.body:setLinearDamping(1)
+
     self.shape = love.physics.newPolygonShape(unpack(shape_coordinates))
+
     self.fixture = love.physics.newFixture(self.body, self.shape, 1)
 
     self.anim = newAnimation(image, 32, 32, 0.1, 0)
@@ -36,9 +39,9 @@ knight.module("Game")
     self.anim:update(dt)
 
     if love.keyboard.isDown("right") then
-      self.body:applyForce(50, 0)
+      self.body:applyForce(75, 0)
     elseif love.keyboard.isDown("left") then
-      self.body:applyForce(-50, 0)
+      self.body:applyForce(-75, 0)
     end
   end
 
