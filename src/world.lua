@@ -28,7 +28,7 @@ m.require({"event"}, function(event)
       end
 
       contact_x, contact_y = contact:getNormal()
-      if contact_x == -0 and contact_y == 1 then
+      if contact_x == 0 and contact_y == 1 then
         thing_on_ground:set_on_ground(true)
       end
     end
