@@ -1,6 +1,7 @@
 package.path = package.path .. ';./src/?.lua;./src/?/init.lua'
 knight = require 'vendor.knight'
 class = require 'vendor.middleclass'
+_ = require 'vendor.underscore'
 
 -- Some global helper methods
 inspect = require 'vendor.inspect'
@@ -52,12 +53,12 @@ end)
 knight.module("Game").component("misc_objects", {"event", "world", "palette"}, function(event, world, palette)
   local block1 = {}
   block1.body = love.physics.newBody(world, 200, 550, "dynamic")
-  block1.shape = love.physics.newRectangleShape(0, 0, 50, 100)
+  block1.shape = love.physics.newRectangleShape(0, 0, 10, 100)
   block1.fixture = love.physics.newFixture(block1.body, block1.shape, 5) -- A higher density gives it more mass.
 
   local block2 = {}
   block2.body = love.physics.newBody(world, 200, 400, "dynamic")
-  block2.shape = love.physics.newRectangleShape(0, 0, 100, 50)
+  block2.shape = love.physics.newRectangleShape(0, 0, 100, 10)
   block2.fixture = love.physics.newFixture(block2.body, block2.shape, 2)
 
   event.on("draw", function(e)

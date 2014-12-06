@@ -1,17 +1,20 @@
 knight.module("Game")
-.component("player", {"event", "world"}, function(event, world)
+.component("player", {"event", "world", "palette"}, function(event, world, palette)
   local Player = class('Player')
+
+  local shape_coordinates = _.map({
+    0, 1,
+    1, 0,
+    2, 1,
+    2, 3,
+    1, 4,
+    0, 3
+  }, function(x) return x * 8 end)
 
   function Player:initialize()
     self.body = love.physics.newBody(world, 640/3, 640/3, "dynamic")
-    self.shape = love.physics.newPolygonShape(
-      0, 1,
-      2, 0,
-      4, 1,
-      4, 6,
-      2, 7,
-      0, 6
-    )
+    self.body:setFixedRotation(true)
+    self.shape = love.physics.newPolygonShape(unpack(shape_coordinates))
     self.fixture = love.physics.newFixture(self.body, self.shape, 1)
     self:bind_events()
   end
@@ -25,6 +28,8 @@ knight.module("Game")
   end
 
   function Player:draw(e)
+    love.graphics.setColor(unpack(palette.violet))
+    love.graphics.polygon('fill', self.body:getWorldPoints(self.shape:getPoints()))
   end
 
   return Player:new()
