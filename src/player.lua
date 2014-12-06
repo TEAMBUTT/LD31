@@ -44,6 +44,10 @@ knight.module("Game")
     elseif love.keyboard.isDown("left") then
       self.body:applyForce(-75, 0)
     end
+
+    if love.keyboard.isDown("up") then
+      self.body:applyForce(0, -30)
+    end
   end
 
   function Player:draw(e)
@@ -62,7 +66,7 @@ knight.module("Game")
   end
 
   function Player:jump()
-    self.body:applyLinearImpulse(0, -75)
+    self.body:applyLinearImpulse(0, -20)
   end
 
   return Player:new()
