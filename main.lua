@@ -11,10 +11,11 @@ end
 require 'event'
 require 'world'
 require 'palette'
+require 'player'
 
 knight.module("Game").component("ball", {"event", "world", "palette"}, function(event, world, palette)
   local ball = {}
-  ball.body = love.physics.newBody(world, 650/2, 650/2, "dynamic")
+  ball.body = love.physics.newBody(world, 1024/2, 768/2, "dynamic")
   ball.shape = love.physics.newCircleShape(20)
   ball.fixture = love.physics.newFixture(ball.body, ball.shape, 1)
   ball.fixture:setRestitution(0.9)
@@ -30,7 +31,7 @@ knight.module("Game").component("ball", {"event", "world", "palette"}, function(
     elseif love.keyboard.isDown("left") then
       ball.body:applyForce(-400, 0)
     elseif love.keyboard.isDown("up") then
-      ball.body:setPosition(650/2, 650/2)
+      ball.body:setPosition(1024/2, 768/2)
     end
   end)
 end)
@@ -38,8 +39,8 @@ end)
 knight.module("Game").component("map", {"event", "world", "palette"}, function(event, world, palette)
   -- just a piece of ground for now
   local ground = {}
-  ground.body = love.physics.newBody(world, 650/2, 650-50/2)
-  ground.shape = love.physics.newRectangleShape(650, 50)
+  ground.body = love.physics.newBody(world, 1024/2, 768-50/2)
+  ground.shape = love.physics.newRectangleShape(1024, 50)
   ground.fixture = love.physics.newFixture(ground.body, ground.shape)
 
   event.on("draw", function(e)
@@ -69,7 +70,7 @@ end)
 knight.module("Game").require({"event", "palette"}, function(event, palette)
   function love.load()
     love.graphics.setBackgroundColor(unpack(palette.cyan))
-    love.window.setMode(650, 650)
+    love.window.setMode(1024, 768)
     event.trigger("load")
   end
 
