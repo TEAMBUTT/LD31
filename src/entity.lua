@@ -1,17 +1,18 @@
 knight.module("Game")
-.component("Entity", {"event"}, function(event)
+.component("Entity", {"event", "EventListener"}, function(event, EventListener)
   local Entity = class('Entity')
 
   function Entity:initialize()
     self.deinit_list = {}
+    self.events = EventListener:new()
   end
 
   function Entity:on_destroy(func)
-    table.insert(self.deinit_list, func)
+    self.events:on("destroy", func)
   end
 
   function Entity:destroy()
-    _.each(self.deinit_list, function(f) f() end)
+    self.events:trigger("destroy")
   end
 
   function Entity:on(name, func)
