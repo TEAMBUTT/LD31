@@ -1,5 +1,5 @@
 knight.module("Game")
-.component("BadGuy", {"event", "world", "palette", "Entity"}, function(event, world, palette, Entity)
+.component("BadGuy", {"world", "Entity", "palette", "player", "AnimationCollection"}, function(world, Entity, palette, player, AnimationCollection)
   local shape_coordinates = _.map({
     0, 1,
     1, 0,
@@ -11,18 +11,20 @@ knight.module("Game")
 
   local BadGuy = class("BadGuy", Entity)
 
-  local image = love.graphics.newImage("muncher.png")
-
-  function BadGuy:initialize()
+  function BadGuy:initialize(x, y)
     Entity.initialize(self)
-    self.body = love.physics.newBody(world, 640/2, 640/3, "dynamic")
+    self.body = love.physics.newBody(world, x, y, "dynamic")
     self.body:setFixedRotation(true)
     self.body:setLinearDamping(1)
     self.shape = love.physics.newPolygonShape(unpack(shape_coordinates))
     self.fixture = love.physics.newFixture(self.body, self.shape, 1)
     self.fixture:setUserData(self)
 
-    self.anim = newAnimation(image, 32, 32, 0.1, 0)
+    --self.anim = newAnimation(image, 32, 32, 0.1, 0)
+    self.anim = AnimationCollection:new({
+      left="muncher_left.png",
+      right="muncher_right.png"
+    }, 32, 32, 0.1)
     self:on("destroy", function() self.body:destroy() end)
 
     self:bind_events()
@@ -35,14 +37,26 @@ knight.module("Game")
 
   function BadGuy:update(dt)
     self.anim:update(dt)
+
+    distance, x1, y1, x2, y2 = love.physics.getDistance(player.fixture, self.fixture)
+    if x1 < x2 then
+      self.anim:set("left")
+      self.body:applyForce(-75, 0)
+    else
+      self.anim:set("right")
+      self.body:applyForce(75, 0)
+    end
   end
 
   function BadGuy:draw(e)
+    love.graphics.setColor(unpack(palette.white))
     local x, y = self.body:getWorldCenter()
     self.anim:draw(x-16, y-16)
   end
 
   return BadGuy
-end).component('badguy', {'BadGuy'}, function(BadGuy)
-  return BadGuy:new()
+end).component('badguys', {'BadGuy'}, function(BadGuy)
+  BadGuy:new(100, 200)
+  BadGuy:new(500, 200)
+  BadGuy:new(700, 200)
 end)

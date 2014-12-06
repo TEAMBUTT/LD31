@@ -1,5 +1,5 @@
 knight.module("Game")
-.component("player", {"event", "world", "palette", "Entity"}, function(event, world, palette, Entity)
+.component("player", {"event", "world", "palette", "Entity", "AnimationCollection"}, function(event, world, palette, Entity, AnimationCollection)
   local Player = class('Player', Entity)
 
   local shape_coordinates = _.map({
@@ -10,8 +10,6 @@ knight.module("Game")
     1, 4,
     0, 3
   }, function(x) return x * 8 end)
-
-  local image = love.graphics.newImage("player.png")
 
   function Player:initialize()
     Entity.initialize(self)
@@ -24,7 +22,10 @@ knight.module("Game")
     self.fixture = love.physics.newFixture(self.body, self.shape, 1)
     self.fixture:setUserData(self)
 
-    self.anim = newAnimation(image, 32, 32, 0.1, 0)
+    self.anim = AnimationCollection:new({
+      left="player_left.png",
+      right="player_right.png"
+    }, 32, 32, 0.1)
 
     self:on("destroy", function() self.body:destroy() end)
 
@@ -40,10 +41,15 @@ knight.module("Game")
   function Player:update(dt)
     self.anim:update(dt)
 
+    self.anim:play()
     if love.keyboard.isDown("right") then
+      self.anim:set("right")
       self.body:applyForce(75, 0)
     elseif love.keyboard.isDown("left") then
+      self.anim:set("left")
       self.body:applyForce(-75, 0)
+    else
+      self.anim:stop()
     end
 
     if love.keyboard.isDown("up") then
