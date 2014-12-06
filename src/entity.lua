@@ -20,5 +20,17 @@ knight.module("Game")
     self.events:on(name, func)
   end
 
+  function Entity:is_on_ground()
+    return self.on_ground
+  end
+
+  function Entity:set_on_ground(on_ground)
+    self.on_ground = on_ground
+  end
+
+  function Entity:is_ground()
+    return false
+  end
+
   return Entity
 end)

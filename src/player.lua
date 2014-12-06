@@ -22,6 +22,7 @@ knight.module("Game")
     self.shape = love.physics.newPolygonShape(unpack(shape_coordinates))
 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1)
+    self.fixture:setUserData(self)
 
     self.anim = newAnimation(image, 32, 32, 0.1, 0)
 
@@ -63,7 +64,9 @@ knight.module("Game")
   end
 
   function Player:jump()
-    self.body:applyLinearImpulse(0, -25)
+    if self:is_on_ground() then
+      self.body:applyLinearImpulse(0, -25)
+    end
   end
 
   return Player:new()

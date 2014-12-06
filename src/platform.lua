@@ -8,6 +8,7 @@ knight
     self.body = love.physics.newBody(world, x, y)
     self.shape = love.physics.newRectangleShape(w/2, h/2, w, h, 0)
     self.fixture = love.physics.newFixture(self.body, self.shape)
+    self.fixture:setUserData(self)
 
     self:on("update", function(dt) self:update(dt) end)
     self:on("draw", function(e) self:draw(e) end)
@@ -22,6 +23,10 @@ knight
   end
 
   function Platform:color() return palette.green end
+
+  function Platform:is_ground()
+    return true
+  end
 
   return Platform
 end)
