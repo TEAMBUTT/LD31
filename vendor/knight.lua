@@ -35,9 +35,10 @@ function knight.module(name)
     for name, component in pairs(components) do
       local dependencies = component.dependencies
 
-      if dependencies_met(dependencies) and not component.result then
+      if not component.loaded and dependencies_met(dependencies) then
         found_one = true
         component.result = component.constructor(unpack(get_dependencies(dependencies)))
+        component.loaded = true
       end
     end
 
@@ -46,7 +47,7 @@ function knight.module(name)
 
   dependencies_met = function(dependencies)
     for _, name in pairs(dependencies) do
-      if not (components[name] and components[name].result) then
+      if not (components[name] and components[name].loaded) then
         return false
       end
     end
