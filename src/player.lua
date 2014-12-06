@@ -25,7 +25,7 @@ knight.module("Game")
 
     self.anim = newAnimation(image, 32, 32, 0.1, 0)
 
-    Entity.on_destroy(self, function() self.body:destroy() end)
+    self:on("destroy", function() self.body:destroy() end)
 
     self:bind_events()
   end

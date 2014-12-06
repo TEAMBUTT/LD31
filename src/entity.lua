@@ -3,12 +3,13 @@ knight.module("Game")
   local Entity = class('Entity')
 
   function Entity:initialize()
-    self.deinit_list = {}
+    -- wire up events
     self.events = EventListener:new()
-  end
-
-  function Entity:on_destroy(func)
-    self.events:on("destroy", func)
+    local subscription = function(n, e)
+      self.events:trigger(n, e)
+    end
+    event:subscribe(subscription)
+    self.events:on("destroy", function() event:unsubscribe(sub) end)
   end
 
   function Entity:destroy()
@@ -16,8 +17,7 @@ knight.module("Game")
   end
 
   function Entity:on(name, func)
-    event:on(name, func)
-    Entity.on_destroy(self, function() event.off(name, func) end)
+    self.events:on(name, func)
   end
 
   return Entity
