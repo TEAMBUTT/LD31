@@ -4,7 +4,7 @@ knight.module("Game")
 
   local shape_coordinates = _.map({
     0, 1,
-    1, 0,
+    1, 0.5,
     2, 1,
     2, 3,
     1, 4,
