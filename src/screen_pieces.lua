@@ -63,14 +63,3 @@ function(Entity, world, palette, player, event)
 
   return ScreenPiece
 end)
-.component("screen_pieces",
-{"ScreenPiece"},
-function(ScreenPiece)
-  return {
-    ScreenPiece:new(50,  50),
-    ScreenPiece:new(200, 50),
-    ScreenPiece:new(400, 50),
-    ScreenPiece:new(600, 50),
-    ScreenPiece:new(800, 50)
-  }
-end)
