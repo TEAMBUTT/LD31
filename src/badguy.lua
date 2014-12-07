@@ -2,7 +2,6 @@ knight.module("Game")
 .component("BadGuy", {"world", "Entity", "palette", "player", "AnimationCollection"}, function(world, Entity, palette, player, AnimationCollection)
   local shape_coordinates = _.map({
     0, 1,
-    1, 0,
     2, 1,
     2, 3,
     1, 4,
