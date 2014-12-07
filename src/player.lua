@@ -61,8 +61,6 @@ knight.module("Game")
 
   function Player:draw(e)
     local x, y = self.body:getWorldCenter()
-    love.graphics.setColor(unpack(palette.lightgreen))
-    love.graphics.polygon('fill', self.body:getWorldPoints(self.shape:getPoints()))
     love.graphics.setColor(unpack(palette.violet))
     self.anim:draw(math.floor(x-8), math.floor(y-8))
   end
