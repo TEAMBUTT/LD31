@@ -32,5 +32,11 @@ knight.module("Game")
     return false
   end
 
+  function Entity:collide(entity, contact)
+  end
+
+  function Entity:uncollide(entity, contact)
+  end
+
   return Entity
 end)

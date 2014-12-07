@@ -17,44 +17,16 @@ m.require({"event"}, function(event)
     local a = a:getUserData()
     local b = b:getUserData()
 
-    if (a:is_ground() and not b:is_ground()) or
-       (b:is_ground() and not a:is_ground()) then
-
-      local thing_on_ground
-
-      if a:is_ground() then
-        thing_on_ground = b
-      else
-        thing_on_ground = a
-      end
-
-      contact_x, contact_y = contact:getNormal()
-      if contact_x == 0 and contact_y == 1 then
-        thing_on_ground:set_on_ground(true)
-      end
-    end
+    a:collide(b, contact)
+    b:collide(a, contact)
   end
 
   function World:endContact(a, b, contact)
     local a = a:getUserData()
     local b = b:getUserData()
 
-    if (a:is_ground() and not b:is_ground() and b:is_on_ground()) or
-       (b:is_ground() and not a:is_ground() and a:is_on_ground()) then
-
-      local thing_on_ground
-
-      if a:is_ground() then
-        thing_on_ground = b
-      else
-        thing_on_ground = a
-      end
-
-      contact_x, contact_y = contact:getNormal()
-      if contact_x == 0 and contact_y == 1 then
-        thing_on_ground:set_on_ground(false)
-      end
-    end
+    a:uncollide(b, contact)
+    b:uncollide(a, contact)
   end
 
   function World:preSolve(a, b, contact) end
