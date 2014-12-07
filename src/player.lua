@@ -27,7 +27,7 @@ knight.module("Game")
     self.anim = AnimationCollection:new({
       left="player_left.png",
       right="player_right.png"
-    }, 16, 16, 0.3)
+    }, 16, 16, 0.1)
 
     self:on("destroy", function() self.body:destroy() end)
 
@@ -62,7 +62,7 @@ knight.module("Game")
   function Player:draw(e)
     local x, y = self.body:getWorldCenter()
     love.graphics.setColor(unpack(palette.violet))
-    self.anim:draw(math.floor(x-8), math.floor(y-8))
+    self.anim:draw(math.floor(x-8), math.floor(y-9))
   end
 
   function Player:key_pressed(key)
