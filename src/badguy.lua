@@ -51,7 +51,7 @@ knight.module("Game")
   function BadGuy:draw(e)
     love.graphics.setColor(unpack(palette.white))
     local x, y = self.body:getWorldCenter()
-    self.anim:draw(x-16, y-16)
+    self.anim:draw(math.floor(x-16), math.floor(y-16))
   end
 
   return BadGuy

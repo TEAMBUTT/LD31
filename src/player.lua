@@ -60,7 +60,7 @@ knight.module("Game")
   function Player:draw(e)
     local x, y = self.body:getWorldCenter()
     love.graphics.setColor(unpack(palette.white))
-    self.anim:draw(x-16, y-16)
+    self.anim:draw(math.floor(x-16), math.floor(y-16))
   end
 
   function Player:key_pressed(key)
