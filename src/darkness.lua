@@ -12,7 +12,7 @@ knight.module("Game")
   event:on("update", function(dt) t:update(dt) end)
 
   event:on("piece_collected", function(count)
-    t = tween.new(2, darkness, {radius=desired_radius(count)}, tween.easing.linear)
+    t = tween.new(2, darkness, {radius=desired_radius(count)}, tween.easing.inOutQuad)
   end)
 
   function darkness:set_stencil()
