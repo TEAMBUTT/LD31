@@ -47,7 +47,7 @@ function(Entity, world, palette, player, event)
   function ScreenPiece:contact(other, contact)
     if other == player then
       ScreenPiece.collected = ScreenPiece.collected + 1
-      event:trigger("piece_collected", ScreenPiece.collected)
+      event:trigger("piece_collected", ScreenPiece.collected, ScreenPiece.total)
       print("" .. ScreenPiece.collected .. " of " .. ScreenPiece.total .. " pieces collected")
       self:destroy()
     end
