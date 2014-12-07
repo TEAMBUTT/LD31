@@ -10,7 +10,7 @@ m.component("Feet", {"Entity"}, function(Entity)
     local x = (topLeftX + bottomRightX) / 2
 
     -- fixme: hardcoded to player
-    self.shape = love.physics.newRectangleShape(8, 32, 10, 10)
+    self.shape = love.physics.newRectangleShape(4, 16, 5, 5)
     self.fixture = love.physics.newFixture(body, self.shape)
     self.fixture:setSensor(true)
 

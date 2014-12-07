@@ -6,7 +6,7 @@ knight.module("Game")
     2, 3,
     1, 4,
     0, 3
-  }, function(x) return x * 8 end)
+  }, function(x) return x * 4 end)
 
   local BadGuy = class("BadGuy", Entity)
 
@@ -23,7 +23,7 @@ knight.module("Game")
     self.anim = AnimationCollection:new({
       left="muncher_left.png",
       right="muncher_right.png"
-    }, 32, 32, 0.1)
+    }, 16, 16, 0.2)
     self:on("destroy", function() self.body:destroy() end)
 
     self:bind_events()
@@ -48,9 +48,9 @@ knight.module("Game")
   end
 
   function BadGuy:draw(e)
-    love.graphics.setColor(unpack(palette.white))
+    love.graphics.setColor(unpack(palette.lightred))
     local x, y = self.body:getWorldCenter()
-    self.anim:draw(math.floor(x-16), math.floor(y-16))
+    self.anim:draw(math.floor(x-8), math.floor(y-8))
   end
 
   return BadGuy

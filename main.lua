@@ -28,16 +28,19 @@ require 'feet'
 require 'darkness'
 require 'text'
 
-local width, height = 1024, 752
+local width, height = 512, 376
+local scale = 2
 
 knight.module("Game").require({"event", "palette"}, function(event, palette)
   function love.load()
     love.graphics.setBackgroundColor(unpack(palette.black))
-    love.window.setMode(width, height)
+    love.window.setMode(width*scale, height*scale)
+    love.graphics.setDefaultFilter('nearest', 'nearest', 1)
     event:trigger("load")
   end
 
   function love.draw()
+    love.graphics.scale(scale, scale)
     event:trigger("draw_stencil")
 
     love.graphics.setColor(palette.grey1)

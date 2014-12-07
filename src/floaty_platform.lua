@@ -4,7 +4,7 @@ knight
   local FloatyPlatform = class("FloatyPlatform", Platform)
 
   function FloatyPlatform:initialize(x, y, width)
-    Platform.initialize(self, x*16, y*16, width*16, 16)
+    Platform.initialize(self, x*8, y*8, width*8, 8)
   end
 
   function FloatyPlatform:color() return palette.brown end

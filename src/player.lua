@@ -9,7 +9,7 @@ knight.module("Game")
     2, 3,
     1, 4,
     0, 3
-  }, function(x) return x * 8 end)
+  }, function(x) return x * 4 end)
 
   function Player:initialize()
     Entity.initialize(self)
@@ -27,7 +27,7 @@ knight.module("Game")
     self.anim = AnimationCollection:new({
       left="player_left.png",
       right="player_right.png"
-    }, 32, 32, 0.1)
+    }, 16, 16, 0.3)
 
     self:on("destroy", function() self.body:destroy() end)
 
@@ -46,23 +46,25 @@ knight.module("Game")
     self.anim:play()
     if love.keyboard.isDown("right") then
       self.anim:set("right")
-      self.body:applyForce(75, 0)
+      self.body:applyForce(15, 0)
     elseif love.keyboard.isDown("left") then
       self.anim:set("left")
-      self.body:applyForce(-75, 0)
+      self.body:applyForce(-15, 0)
     else
       self.anim:stop()
     end
 
     if love.keyboard.isDown("up") then
-      self.body:applyForce(0, -30)
+      self.body:applyForce(0, -20)
     end
   end
 
   function Player:draw(e)
     local x, y = self.body:getWorldCenter()
-    love.graphics.setColor(unpack(palette.white))
-    self.anim:draw(math.floor(x-16), math.floor(y-16))
+    love.graphics.setColor(unpack(palette.lightgreen))
+    love.graphics.polygon('fill', self.body:getWorldPoints(self.shape:getPoints()))
+    love.graphics.setColor(unpack(palette.violet))
+    self.anim:draw(math.floor(x-8), math.floor(y-8))
   end
 
   function Player:key_pressed(key)
@@ -73,7 +75,7 @@ knight.module("Game")
 
   function Player:jump()
     if self.feet:on_ground() then
-      self.body:applyLinearImpulse(0, -25)
+      self.body:applyLinearImpulse(0, -5)
     end
   end
 

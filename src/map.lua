@@ -3,12 +3,12 @@ knight
 .component("map",
 {"event", "world", "palette", "Platform", "FloatyPlatform", "ScreenPiece"},
 function(event, world, palette, Platform, FloatyPlatform, ScreenPiece)
-  local width, height = 1024, love.graphics.getHeight()
+  local width, height = 512, love.graphics.getHeight()/2
 
-  local floor = Platform:new(0, height - 32, 1024, 32)
+  local floor = Platform:new(0, height - 16, width, 16)
   local left_wall = Platform:new(-100, 0, 100, height)
-  local right_wall = Platform:new(1024, 0, 100, height)
-  local ceiling = Platform:new(0, -100, 1024, 100)
+  local right_wall = Platform:new(width, 0, 100, height)
+  local ceiling = Platform:new(0, -100, width, 100)
 
   local map = {
     "                                                                ",
@@ -76,12 +76,12 @@ function(event, world, palette, Platform, FloatyPlatform, ScreenPiece)
       FloatyPlatform:new(x1, y, x2 - x1)
     end)
     scanrow(s, "%*", function(x, _)
-      ScreenPiece:new(x*16, y*16)
+      ScreenPiece:new(x*8, y*8)
     end)
   end
 
   -- Ensure I am not bad at counting
-  assert(height/16 == #map)
-  assert(1024/16 == string.len(map[1]))
+  -- assert(height/16 == #map)
+  -- assert(1024/16 == string.len(map[1]))
 
 end)
