@@ -4,10 +4,11 @@ knight.module("Game")
     " abcdefghijklmnopqrstuvwxyz" ..
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ0" ..
     "123456789.,!?-+/():;%&`'*#=[]\"")
+  font:setFilter('nearest', 'nearest', 1)
   event:on("draw_overlay", function()
     love.graphics.setColor(palette.white)
     love.graphics.setFont(font)
-    love.graphics.printf("ZOMG!\nCollect all the broken screen pieces,\nyou noob!", 0, 50, 1024, "center")
+    love.graphics.printf("ZOMG!\nCollect all the broken screen pieces,\nyou noob!", 0, 50, 512, "center")
   end)
 end)
 
