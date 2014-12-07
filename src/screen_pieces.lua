@@ -14,8 +14,11 @@ function(Entity, world, palette, player)
 
   local ScreenPiece = class("ScreenPiece", Entity)
 
-  function ScreenPiece:initialize(n, x, y)
-    self.piece_number = n or 1
+  ScreenPiece.total = 0
+  ScreenPiece.collected = 0
+
+  function ScreenPiece:initialize(x, y)
+    ScreenPiece.total = ScreenPiece.total + 1
 
     Entity.initialize(self)
 
@@ -43,7 +46,8 @@ function(Entity, world, palette, player)
 
   function ScreenPiece:contact(other, contact)
     if other == player then
-      print "ONE POINT"
+      ScreenPiece.collected = ScreenPiece.collected + 1
+      print("" .. ScreenPiece.collected .. " of " .. ScreenPiece.total .. " pieces collected")
       self:destroy()
     end
   end
@@ -62,10 +66,10 @@ end)
 {"ScreenPiece"},
 function(ScreenPiece)
   return {
-    ScreenPiece:new(1, 50,  50),
-    ScreenPiece:new(2, 200, 50),
-    ScreenPiece:new(2, 400, 50),
-    ScreenPiece:new(2, 600, 50),
-    ScreenPiece:new(2, 800, 50)
+    ScreenPiece:new(50,  50),
+    ScreenPiece:new(200, 50),
+    ScreenPiece:new(400, 50),
+    ScreenPiece:new(600, 50),
+    ScreenPiece:new(800, 50)
   }
 end)
