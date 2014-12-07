@@ -40,10 +40,10 @@ knight.module("Game")
     distance, x1, y1, x2, y2 = love.physics.getDistance(player.fixture, self.fixture)
     if x1 < x2 then
       self.anim:set("left")
-      self.body:applyForce(-25, 0)
+      self.body:applyForce(-5, 0)
     else
       self.anim:set("right")
-      self.body:applyForce(25, 0)
+      self.body:applyForce(5, 0)
     end
   end
 
@@ -55,7 +55,7 @@ knight.module("Game")
 
   return BadGuy
 end).component('badguys', {'BadGuy'}, function(BadGuy)
-  BadGuy:new(100, 200)
-  BadGuy:new(500, 200)
-  BadGuy:new(700, 200)
+  BadGuy:new(100, 100)
+  BadGuy:new(200, 100)
+  BadGuy:new(300, 100)
 end)

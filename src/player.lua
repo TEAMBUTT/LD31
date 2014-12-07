@@ -55,7 +55,7 @@ knight.module("Game")
     end
 
     if love.keyboard.isDown("up") then
-      self.body:applyForce(0, -20)
+      self.body:applyForce(0, -5)
     end
   end
 
@@ -73,7 +73,7 @@ knight.module("Game")
 
   function Player:jump()
     if self.feet:on_ground() then
-      self.body:applyLinearImpulse(0, -5)
+      self.body:applyLinearImpulse(0, -6)
     end
   end
 
