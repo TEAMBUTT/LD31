@@ -25,15 +25,23 @@ require 'screen_pieces'
 require 'images'
 require 'animation_collection'
 require 'feet'
+require 'darkness'
+
+local width, height = 1024, 752
 
 knight.module("Game").require({"event", "palette"}, function(event, palette)
   function love.load()
     love.graphics.setBackgroundColor(unpack(palette.black))
-    love.window.setMode(1024, 752)
+    love.window.setMode(width, height)
     event:trigger("load")
   end
 
   function love.draw()
+    -- yuck. sorry
+    knight.module("Game").require({"darkness"}, function(darkness) darkness:set_stencil()  end)
+    love.graphics.setColor(palette.grey1)
+    love.graphics.rectangle("fill", 0, 0, width, height)
+
     event:trigger("draw")
   end
 
