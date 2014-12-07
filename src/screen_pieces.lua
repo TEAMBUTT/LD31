@@ -1,6 +1,6 @@
 knight
 .module("Game")
-.component("screen_pieces",
+.component("ScreenPiece",
 {"Entity", "world", "palette", "player"},
 function(Entity, world, palette, player)
   local shape_coordinates = _.map({
@@ -14,12 +14,12 @@ function(Entity, world, palette, player)
 
   local ScreenPiece = class("ScreenPiece", Entity)
 
-  function ScreenPiece:initialize(n)
+  function ScreenPiece:initialize(n, x, y)
     self.piece_number = n or 1
 
     Entity.initialize(self)
 
-    self.body = love.physics.newBody(world, 50, 50, "dynamic")
+    self.body = love.physics.newBody(world, x, y, "dynamic")
     self.body:setFixedRotation(true)
     self.body:setLinearDamping(1)
 
@@ -56,5 +56,16 @@ function(Entity, world, palette, player)
     love.graphics.polygon('fill', self.body:getWorldPoints(self.shape:getPoints()))
   end
 
-  ScreenPiece:new()
+  return ScreenPiece
+end)
+.component("screen_pieces",
+{"ScreenPiece"},
+function(ScreenPiece)
+  return {
+    ScreenPiece:new(1, 50,  50),
+    ScreenPiece:new(2, 200, 50),
+    ScreenPiece:new(2, 400, 50),
+    ScreenPiece:new(2, 600, 50),
+    ScreenPiece:new(2, 800, 50)
+  }
 end)
