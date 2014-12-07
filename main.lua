@@ -28,6 +28,7 @@ require 'feet'
 require 'darkness'
 require 'text'
 require 'slope'
+require 'window'
 
 local width, height = 512, 376
 local scale = 2

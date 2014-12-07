@@ -1,0 +1,6 @@
+knight.module("Game")
+.component("window", {"event"}, function(event)
+  event:on("load", function()
+    love.window.setTitle("pieces")
+  end)
+end)
