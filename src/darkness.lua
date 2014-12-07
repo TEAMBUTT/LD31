@@ -3,7 +3,7 @@ knight.module("Game")
   local darkness = {}
 
   local function desired_radius(collected)
-    return 120 + (60 * collected)
+    return 60 + (30 * collected)
   end
 
   -- sentinel null-tweens
