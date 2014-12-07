@@ -20,54 +20,61 @@ function(event, world, palette, Platform, FloatyPlatform)
     "                                                                ",
     "                                                                ",
     "                                                                ",
+    "                                                =               ",
+    "                  =========================     =               ",
+    "          ========                              =               ",
+    "                                              ==                ",
+    "                                         =====                  ",
+    "                                      ===                       ",
+    "  ========                         ===                          ",
+    "                                ===                             ",
+    "                            ====                                ",
+    "                        ====                                    ",
     "                                                                ",
     "                                                                ",
-    "          ========                                              ",
-    "                                                                ",
-    "                                                                ",
-    "                                                                ",
-    "  ========                                                      ",
-    "                                                                ",
-    "                                                                ",
-    "                                                                ",
-    "                                                                ",
-    "                                                                ",
-    "                                                                ",
-    "                                                                ",
-    "                                                                ",
+    "                  ====                                          ",
+    "                       ====                                     ",
+    "                            ====                                ",
     "                                ========                        ",
     "                                                                ",
+    "                                        ==                      ",
     "                                                                ",
     "                                                                ",
+    "                                              ===               ",
     "                                                                ",
     "                                                                ",
+    "                                                   ===          ",
     "                                                                ",
     "                                                                ",
+    "                                                         ===    ",
     "                                                                ",
     "                                                                ",
-    "                                                                ",
-    "                                                                ",
-    "                                                                ",
-    "                                                                ",
-    "                                                   ============ ",
+    "                                                   ==========   ",
     "                                                                ",
     "                                               ==               ",
     "                             ==========       =  =              ",
-    "                     ========          =======    =             ",
+    "                     ==============================             ",
     "                                                                ",
     "                                                                ",
     "                                                                ",
     "                                                                "
   }
 
-  for y, s in ipairs(map) do
+  local function scanrow(s, pattern, callback)
     local pos = 0
     while true do
       local start, fin = string.find(s, "=+", pos)
       if start == nil then break end
-      FloatyPlatform:new(start-1, y-1, fin - start + 1)
+      callback(start-1, fin)
       pos = fin+1
     end
+  end
+
+  for i, s in ipairs(map) do
+    local y = i-1
+    scanrow(s, "=+", function(x1, x2)
+      FloatyPlatform:new(x1, y, x2 - x1)
+    end)
   end
 
   -- Ensure I am not bad at counting
