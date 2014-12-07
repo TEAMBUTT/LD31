@@ -6,12 +6,16 @@ knight
   function Platform:initialize(x, y, w, h)
     Entity.initialize(self)
     self.body = love.physics.newBody(world, x, y)
-    self.shape = love.physics.newRectangleShape(w/2, h/2, w, h, 0)
+    self.shape = self:build_shape(w, h)
     self.fixture = love.physics.newFixture(self.body, self.shape)
     self.fixture:setUserData(self)
 
     self:on("update", function(dt) self:update(dt) end)
     self:on("draw", function(e) self:draw(e) end)
+  end
+
+  function Platform:build_shape(w, h)
+    return love.physics.newRectangleShape(w/2, h/2, w, h)
   end
 
   function Platform:draw(e)

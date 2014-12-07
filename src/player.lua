@@ -18,6 +18,7 @@ knight.module("Game")
     self.body:setLinearDamping(1)
 
     self.shape = love.physics.newPolygonShape(unpack(shape_coordinates))
+    self.direction = "left"
 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1)
     self.fixture:setUserData(self)
@@ -45,13 +46,19 @@ knight.module("Game")
 
     self.anim:play()
     if love.keyboard.isDown("right") then
-      self.anim:set("right")
+      self.direction = "right"
       self.body:applyForce(15, 0)
     elseif love.keyboard.isDown("left") then
-      self.anim:set("left")
+      self.direction = "left"
       self.body:applyForce(-15, 0)
     else
       self.anim:stop()
+    end
+
+    if self.feet:on_ground() then
+      self.anim:set(self.direction)
+    else
+      self.anim:set(self.direction .. "_jump")
     end
 
     if love.keyboard.isDown("up") then
