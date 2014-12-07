@@ -27,7 +27,6 @@ m.require({"event"}, function(event)
     delegate(b, a)
   end
 
-
   event:on("load", function()
     knight.module("Game").provide("world", World:new().world)
   end)
