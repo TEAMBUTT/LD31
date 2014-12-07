@@ -1,8 +1,8 @@
 knight
 .module("Game")
 .component("screen_pieces",
-{"Entity", "world", "palette"},
-function(Entity, world, palette)
+{"Entity", "world", "palette", "player"},
+function(Entity, world, palette, player)
   local shape_coordinates = _.map({
     0, 1,
     1, 0,
@@ -27,6 +27,10 @@ function(Entity, world, palette)
 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1)
     self.fixture:setUserData(self)
+    self:on("destroy", function()
+      self.fixture:destroy()
+      self.body:destroy()
+    end)
 
     self:bind_events()
   end
@@ -34,6 +38,14 @@ function(Entity, world, palette)
   function ScreenPiece:bind_events()
     self:on("update", function(dt) self:update(dt) end)
     self:on("draw", function() self:draw() end)
+    self:on("startContact", function(...) self:contact(...) end)
+  end
+
+  function ScreenPiece:contact(other, contact)
+    if other == player then
+      print "ONE POINT"
+      self:destroy()
+    end
   end
 
   function ScreenPiece:update(dt)

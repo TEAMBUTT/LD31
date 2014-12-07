@@ -9,7 +9,7 @@ knight.module("Game")
       self.events:trigger(n, e)
     end
     event:subscribe(subscription)
-    self.events:on("destroy", function() event:unsubscribe(sub) end)
+    self.events:on("destroy", function() event:unsubscribe(subscription) end)
   end
 
   function Entity:destroy()

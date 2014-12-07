@@ -25,7 +25,7 @@ knight.module("Game")
   end
 
   function EventListener:unsubscribe(func)
-    callbacks[name] = _.reject(get(name), function(f)
+    self.subscribers = _.reject(self.subscribers, function(f)
       return f == func
     end)
   end
