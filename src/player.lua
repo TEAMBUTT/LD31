@@ -63,9 +63,6 @@ knight.module("Game")
     local x, y = self.body:getWorldCenter()
     love.graphics.setColor(unpack(palette.white))
     self.anim:draw(math.floor(x-16), math.floor(y-16))
-
-    love.graphics.setColor(unpack(palette.violet))
-    love.graphics.polygon('fill', self.body:getWorldPoints(self.feet.shape:getPoints()))
   end
 
   function Player:key_pressed(key)
