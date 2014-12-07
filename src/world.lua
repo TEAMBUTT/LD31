@@ -19,6 +19,7 @@ m.require({"event"}, function(event)
 
     if (a:is_ground() and not b:is_ground()) or
        (b:is_ground() and not a:is_ground()) then
+
       local thing_on_ground
 
       if a:is_ground() then
@@ -40,6 +41,7 @@ m.require({"event"}, function(event)
 
     if (a:is_ground() and not b:is_ground() and b:is_on_ground()) or
        (b:is_ground() and not a:is_ground() and a:is_on_ground()) then
+
       local thing_on_ground
 
       if a:is_ground() then

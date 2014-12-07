@@ -20,6 +20,7 @@ require 'map'
 require 'platform'
 require 'floaty_platform'
 require 'badguy'
+require 'screen_pieces'
 require 'images'
 require 'animation_collection'
 
