@@ -27,7 +27,9 @@ knight.module("Game")
 
     self.anim = AnimationCollection:new({
       left="player_left.png",
-      right="player_right.png"
+      right="player_right.png",
+      jump_left="player_jump_left.png",
+      jump_right="player_jump_right.png"
     }, 16, 16, 0.1)
 
     self:on("destroy", function() self.body:destroy() end)
@@ -58,7 +60,7 @@ knight.module("Game")
     if self.feet:on_ground() then
       self.anim:set(self.direction)
     else
-      self.anim:set(self.direction .. "_jump")
+      self.anim:set("jump_" .. self.direction)
     end
 
     if love.keyboard.isDown("up") then
