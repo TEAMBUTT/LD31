@@ -80,6 +80,14 @@ knight.module("Game")
     end
   end
 
+  function Player:bump(normal)
+    local scale = 6
+    local x, y = unpack(normal)
+    x = -x * scale
+    y = -y * scale
+    self.body:applyLinearImpulse(x, y)
+  end
+
   function Player:jump()
     if self.feet:on_ground() then
       self.body:applyLinearImpulse(0, -6)

@@ -32,6 +32,9 @@ knight.module("Game")
   function BadGuy:bind_events()
     self:on("update", function(dt) self:update(dt) end)
     self:on("draw", function(e) self:draw(e) end)
+    self:on("startContact", function(other, contact)
+      self:start_contact(other, contact)
+    end)
   end
 
   function BadGuy:update(dt)
@@ -51,6 +54,12 @@ knight.module("Game")
     love.graphics.setColor(unpack(palette.lightred))
     local x, y = self.body:getWorldCenter()
     self.anim:draw(math.floor(x-8), math.floor(y-8))
+  end
+
+  function BadGuy:start_contact(other, contact)
+    if other.class.name == "Player" then
+      other:bump({contact:getNormal()})
+    end
   end
 
   return BadGuy
