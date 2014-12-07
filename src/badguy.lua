@@ -1,5 +1,5 @@
 knight.module("Game")
-.component("BadGuy", {"world", "Entity", "palette", "player", "AnimationCollection"}, function(world, Entity, palette, player, AnimationCollection)
+.component("BadGuy", {"world", "Entity", "palette", "player", "AnimationCollection", "darkness"}, function(world, Entity, palette, player, AnimationCollection, darkness)
   local shape_coordinates = _.map({
     0, 1,
     2, 1,
@@ -41,12 +41,14 @@ knight.module("Game")
     self.anim:update(dt)
 
     distance, x1, y1, x2, y2 = love.physics.getDistance(player.fixture, self.fixture)
-    if x1 < x2 then
-      self.anim:set("left")
-      self.body:applyForce(-5, 0)
-    else
-      self.anim:set("right")
-      self.body:applyForce(5, 0)
+    if distance <= darkness.radius then
+      if x1 < x2 then
+        self.anim:set("left")
+        self.body:applyForce(-5, 0)
+      else
+        self.anim:set("right")
+        self.body:applyForce(5, 0)
+      end
     end
   end
 
