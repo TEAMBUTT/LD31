@@ -48,7 +48,6 @@ function(Entity, world, palette, player, event)
     if other == player then
       ScreenPiece.collected = ScreenPiece.collected + 1
       event:trigger("piece_collected", ScreenPiece.collected, ScreenPiece.total)
-      print("" .. ScreenPiece.collected .. " of " .. ScreenPiece.total .. " pieces collected")
       self:destroy()
     end
   end
