@@ -26,7 +26,7 @@ require 'animation_collection'
 knight.module("Game").require({"event", "palette"}, function(event, palette)
   function love.load()
     love.graphics.setBackgroundColor(unpack(palette.black))
-    love.window.setMode(1024, 768)
+    love.window.setMode(1024, 752)
     event:trigger("load")
   end
 
