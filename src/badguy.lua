@@ -40,10 +40,10 @@ knight.module("Game")
     distance, x1, y1, x2, y2 = love.physics.getDistance(player.fixture, self.fixture)
     if x1 < x2 then
       self.anim:set("left")
-      self.body:applyForce(-75, 0)
+      self.body:applyForce(-25, 0)
     else
       self.anim:set("right")
-      self.body:applyForce(75, 0)
+      self.body:applyForce(25, 0)
     end
   end
 
