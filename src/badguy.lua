@@ -54,8 +54,4 @@ knight.module("Game")
   end
 
   return BadGuy
-end).component('badguys', {'BadGuy'}, function(BadGuy)
-  BadGuy:new(100, 100)
-  BadGuy:new(200, 100)
-  BadGuy:new(300, 100)
 end)

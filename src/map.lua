@@ -1,8 +1,8 @@
 knight
 .module("Game")
 .component("map",
-{"event", "world", "palette", "Platform", "FloatyPlatform", "ScreenPiece"},
-function(event, world, palette, Platform, FloatyPlatform, ScreenPiece)
+{"event", "world", "palette", "Platform", "FloatyPlatform", "ScreenPiece", "BadGuy"},
+function(event, world, palette, Platform, FloatyPlatform, ScreenPiece, BadGuy)
   local width, height = 512, love.graphics.getHeight()/2
 
   local floor = Platform:new(0, height - 16, width, 16)
@@ -18,7 +18,7 @@ function(event, world, palette, Platform, FloatyPlatform, ScreenPiece)
     "                                                                ",
     "                              *                                 ",
     "                                                                ",
-    "              *                                                 ",
+    "              *          B                                      ",
     "                                                                ",
     "                                                ==              ",
     "                  ==================            ==              ",
@@ -30,14 +30,14 @@ function(event, world, palette, Platform, FloatyPlatform, ScreenPiece)
     "=========                       ======                         =",
     "======                      ==========                          ",
     "                        ==============                          ",
-    "                                             =         =      ==",
+    "                                             =   B     =      ==",
     "                                  *          ===========        ",
     "                                                                ",
-    "                                                             ===",
+    "               =                                             ===",
     "                            =          =                        ",
     "                            ============                        ",
     "                                                            ====",
-    "           ==     ====                                          ",
+    "    B      ==     ====                                          ",
     "=============     ====                                          ",
     "                                                           =====",
     "                                                                ",
@@ -48,13 +48,13 @@ function(event, world, palette, Platform, FloatyPlatform, ScreenPiece)
     "                          ===                                   ",
     "  *                                                       *     ",
     "                                         ==                     ",
-    "====                                      ==========            ",
+    "====                                      ==========   B        ",
     "                  ==                               =============",
     "         *        ==                                            ",
     "               =====                                            ",
-    "           ====================                                 ",
+    "      B    ====================                                 ",
     "============                                                    ",
-    "                                                                ",
+    "        B                                             B         ",
     "                                                                ",
     "                                                                ",
     "                                                                "
@@ -77,6 +77,9 @@ function(event, world, palette, Platform, FloatyPlatform, ScreenPiece)
     end)
     scanrow(s, "%*", function(x, _)
       ScreenPiece:new(x*8, y*8)
+    end)
+    scanrow(s, "B", function(x, _)
+      BadGuy:new(x*8, y*8)
     end)
   end
 
