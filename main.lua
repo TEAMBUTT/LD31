@@ -26,6 +26,7 @@ require 'images'
 require 'animation_collection'
 require 'feet'
 require 'darkness'
+require 'text'
 
 local width, height = 1024, 752
 
@@ -43,6 +44,9 @@ knight.module("Game").require({"event", "palette"}, function(event, palette)
     love.graphics.rectangle("fill", 0, 0, width, height)
 
     event:trigger("draw")
+
+    love.graphics.setStencil()
+
     event:trigger("draw_overlay")
   end
 
