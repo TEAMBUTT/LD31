@@ -15,15 +15,15 @@ knight.module("Game")
     t = tween.new(2, darkness, {radius=desired_radius(count)}, tween.easing.inOutQuad)
   end)
 
-  function darkness:set_stencil()
-    local darkness_stencil = function()
-      local x, y = player.body:getWorldCenter()
-      local radius = darkness.radius
-      love.graphics.circle("fill", x, y, radius, radius)
-    end
-
-    love.graphics.setStencil(darkness_stencil)
+  local darkness_stencil = function()
+    local x, y = player.body:getWorldCenter()
+    local radius = darkness.radius
+    love.graphics.circle("fill", x, y, radius, radius)
   end
+
+  event:on("draw_stencil", function()
+    love.graphics.setStencil(darkness_stencil)
+  end)
 
   return darkness
 end)

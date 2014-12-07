@@ -37,12 +37,13 @@ knight.module("Game").require({"event", "palette"}, function(event, palette)
   end
 
   function love.draw()
-    -- yuck. sorry
-    knight.module("Game").require({"darkness"}, function(darkness) darkness:set_stencil()  end)
+    event:trigger("draw_stencil")
+
     love.graphics.setColor(palette.grey1)
     love.graphics.rectangle("fill", 0, 0, width, height)
 
     event:trigger("draw")
+    event:trigger("draw_overlay")
   end
 
   function love.update(dt)
