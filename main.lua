@@ -23,6 +23,7 @@ require 'badguy'
 require 'screen_pieces'
 require 'images'
 require 'animation_collection'
+require 'feet'
 
 knight.module("Game").require({"event", "palette"}, function(event, palette)
   function love.load()

@@ -7,16 +7,16 @@ knight.module("Game")
   end
 
   function EventListener:on(event, func)
-    self:subscribe(function(name, e)
+    self:subscribe(function(name, ...)
       if name == event then
-        func(e)
+        func(...)
       end
     end)
   end
 
-  function EventListener:trigger(name, e)
+  function EventListener:trigger(name, ...)
     for i, func in ipairs(self.subscribers) do
-      func(name, e)
+      func(name, ...)
     end
   end
 

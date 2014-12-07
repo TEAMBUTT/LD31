@@ -1,5 +1,5 @@
 knight.module("Game")
-.component("player", {"event", "world", "palette", "Entity", "AnimationCollection"}, function(event, world, palette, Entity, AnimationCollection)
+.component("player", {"event", "world", "palette", "Entity", "AnimationCollection", "Feet"}, function(event, world, palette, Entity, AnimationCollection, Feet)
   local Player = class('Player', Entity)
 
   local shape_coordinates = _.map({
@@ -21,6 +21,8 @@ knight.module("Game")
 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1)
     self.fixture:setUserData(self)
+
+    self.feet = Feet:new(self.fixture, self.body)
 
     self.anim = AnimationCollection:new({
       left="player_left.png",
@@ -61,6 +63,9 @@ knight.module("Game")
     local x, y = self.body:getWorldCenter()
     love.graphics.setColor(unpack(palette.white))
     self.anim:draw(math.floor(x-16), math.floor(y-16))
+
+    love.graphics.setColor(unpack(palette.violet))
+    love.graphics.polygon('fill', self.body:getWorldPoints(self.feet.shape:getPoints()))
   end
 
   function Player:key_pressed(key)
@@ -70,7 +75,7 @@ knight.module("Game")
   end
 
   function Player:jump()
-    if self:is_on_ground() then
+    if self.feet:on_ground() then
       self.body:applyLinearImpulse(0, -25)
     end
   end
