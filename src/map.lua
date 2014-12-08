@@ -39,7 +39,7 @@ function(event, world, Platform, FloatyPlatform, ScreenPiece, BadGuy, player, Le
     "                                                            ====",
     "    B  =          ====                                      ====",
     "========_         ====                                     /====",
-    "    =====          ==                                      =====",
+    "    =====          ==     % B %                            =====",
     "                   ==      ===           ==      /=_       =====",
     "                   ==      ===           ==                =====",
     "             //     =      ===           ====             ======",
