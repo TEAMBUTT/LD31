@@ -1,8 +1,8 @@
 knight
 .module("Game")
 .component("map",
-{"event", "world", "Platform", "FloatyPlatform", "ScreenPiece", "BadGuy", "player", "LeftSlope", "RightSlope", "GhostWall"},
-function(event, world, Platform, FloatyPlatform, ScreenPiece, BadGuy, player, LeftSlope, RightSlope, GhostWall)
+{"event", "world", "Platform", "FloatyPlatform", "ScreenPiece", "BadGuy", "BirdGuy", "player", "LeftSlope", "RightSlope", "GhostWall"},
+function(event, world, Platform, FloatyPlatform, ScreenPiece, BadGuy, BirdGuy, player, LeftSlope, RightSlope, GhostWall)
   local width, height = 512, love.graphics.getHeight()/2
 
   local floor = Platform:new(0, height - 16, width, 16)
@@ -26,7 +26,7 @@ function(event, world, Platform, FloatyPlatform, ScreenPiece, BadGuy, player, Le
     "                                              ====              ",
     "    *                       *              ///====              ",
     "                                      ============              ",
-    "__________                         ===============             /",
+    "__________       X                 ===============             /",
     "==========                      ======                         =",
     "======                      =======                            =",
     "                       /=   =======                           /=",
@@ -34,7 +34,7 @@ function(event, world, Platform, FloatyPlatform, ScreenPiece, BadGuy, player, Le
     "    /                             *          ===========      ==",
     "    =                                                         ==",
     "    =_     //__                                              ===",
-    "    ====   ====           //=          =__                   ===",
+    "    ====   ====           //=          =__         X         ===",
     "                            ============                     ===",
     "                                                            ====",
     "    B  =          ====                                      ====",
@@ -44,15 +44,15 @@ function(event, world, Platform, FloatyPlatform, ScreenPiece, BadGuy, player, Le
     "                   ==      ===           ==                =====",
     "             //     =      ===           ====             ======",
     "          /====     =     /===_          ====             ======",
-    "                          =====         /====                   ",
+    "    X                     =====         /====                   ",
     "                          =====         ======                  ",
     "_        *                               =====                 *",
     "=_       ==                              ====      _         //=",
-    "=      //==__                             ===      =   B     ===",
+    "=      //==__           X                 ===      =   B     ===",
     "=      ======     ==        =                      =============",
     "=               //== @      =                                   ",
     "=*              ====__    //=__                                 ",
-    "===_  B    ====================                                *",
+    "===_  B    ====================           X                    *",
     "====       ======================__                            =",
     "===================================                   B      //=",
     "=====================================__                  ///====",
@@ -86,6 +86,9 @@ function(event, world, Platform, FloatyPlatform, ScreenPiece, BadGuy, player, Le
     end)
     scanrow(s, "B", function(x, _)
       BadGuy:new(x*8, y*8)
+    end)
+    scanrow(s, "X", function(x, _)
+      BirdGuy:new(x*8, y*8)
     end)
     scanrow(s, "@", function(x, _)
       player.body:setPosition(x*8, y*8)

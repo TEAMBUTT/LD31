@@ -31,6 +31,7 @@ _.each({
  'platform',
  'floaty_platform',
  'badguy',
+ 'birdguy',
  'screen_pieces',
  'images',
  'animation_collection',
