@@ -22,25 +22,29 @@ function(Entity, world, event, palette)
     local vy = -15
     if direction == "right" then
       self.body:setLinearVelocity(vx, vy)
-    else
+    elseif direction == "left" then
       self.body:setLinearVelocity(-vx, vy)
+    else
+      local r = love.math.random
+      self.body:setLinearVelocity(r(-40, 40), r(-30, 0))
     end
 
     self.animation = {
       opacity = 255,
       size = 1
     }
-    self.opacity_tween = tween.new(0.25, self.animation, {
+    self.opacity_tween = tween.new(0.20, self.animation, {
       opacity = 0,
-      size = 5
+      size = 5.5
     }, tween.easing.inOutQuad)
 
     self:bind_events()
   end
 
   function Puff:bind_events()
-    event:on("update", function(dt) self:update(dt) end)
-    event:on("draw", function(e) self:draw(e) end)
+    self:on("update", function(dt) self:update(dt) end)
+    self:on("draw", function(e) self:draw(e) end)
+    self:on("destroy", function() self.body:destroy() end)
   end
 
   function Puff:update(dt)

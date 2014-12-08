@@ -97,6 +97,9 @@ function(event, world, palette, Entity, AnimationCollection, Feet, Puff)
       x, y = self.body:getWorldCenter()
       Puff:new(x, y, "left")
       Puff:new(x, y, "right")
+      Puff:new(x, y, "random")
+      Puff:new(x, y, "random")
+      Puff:new(x, y, "random")
       event:trigger("jump")
     end
   end

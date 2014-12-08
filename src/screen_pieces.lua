@@ -38,7 +38,6 @@ function(Entity, world, palette, event, AnimationCollection)
     self.fixture:setUserData(self)
 
     self:on("destroy", function()
-      self.fixture:destroy()
       self.body:destroy()
     end)
 
