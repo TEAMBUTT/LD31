@@ -27,7 +27,7 @@ knight
   function Platform:update(dt)
   end
 
-  function Platform:color() return palette.green end
+  function Platform:color() return palette.grey3 end
 
   function Platform:is_ground()
     return true
