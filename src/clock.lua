@@ -9,6 +9,7 @@ knight.module("Game")
 
   event:on("victory", function()
     highscores:submit(clock.time)
+    clock:freeze()
   end)
 
   function clock:freeze()
