@@ -21,6 +21,7 @@ knight.module("Game")
     self.direction = "left"
 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1)
+    self.fixture:setCategory(FixtureCategory.player)
     self.fixture:setUserData(self)
 
     self.feet = Feet:new(self.fixture, self.body)

@@ -1,8 +1,8 @@
 knight
 .module("Game")
 .component("map",
-{"event", "world", "Platform", "FloatyPlatform", "ScreenPiece", "BadGuy", "player", "LeftSlope", "RightSlope"},
-function(event, world, Platform, FloatyPlatform, ScreenPiece, BadGuy, player, LeftSlope, RightSlope)
+{"event", "world", "Platform", "FloatyPlatform", "ScreenPiece", "BadGuy", "player", "LeftSlope", "RightSlope", "GhostWall"},
+function(event, world, Platform, FloatyPlatform, ScreenPiece, BadGuy, player, LeftSlope, RightSlope, GhostWall)
   local width, height = 512, love.graphics.getHeight()/2
 
   local floor = Platform:new(0, height - 16, width, 16)
@@ -89,6 +89,9 @@ function(event, world, Platform, FloatyPlatform, ScreenPiece, BadGuy, player, Le
     end)
     scanrow(s, "@", function(x, _)
       player.body:setPosition(x*8, y*8)
+    end)
+    scanrow(s, "%%", function(x1, x2)
+      GhostWall:new(x1, y, x2 - x1)
     end)
   end
 

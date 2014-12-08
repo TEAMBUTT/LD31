@@ -11,6 +11,15 @@ function p(val)
   print(inspect(val))
 end
 
+FixtureCategory = {
+  player = 1,
+  feet = 2,
+  bad_guy = 3,
+  piece = 4,
+  wall = 5,
+  ghost_wall = 6
+}
+
 require 'event_listener'
 require 'event'
 require 'world'
@@ -30,6 +39,7 @@ require 'text'
 require 'slope'
 require 'window'
 require 'audio'
+require 'ghost_wall'
 
 local width, height = 512, 376
 local scale = 2

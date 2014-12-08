@@ -8,6 +8,7 @@ knight
     self.body = love.physics.newBody(world, x, y)
     self.shape = self:build_shape(w, h)
     self.fixture = love.physics.newFixture(self.body, self.shape)
+    self.fixture:setCategory(FixtureCategory.wall)
     self.fixture:setUserData(self)
 
     self:on("update", function(dt) self:update(dt) end)

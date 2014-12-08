@@ -12,6 +12,7 @@ m.component("Feet", {"Entity"}, function(Entity)
     -- fixme: hardcoded to player
     self.shape = love.physics.newRectangleShape(4, 16, 5, 5)
     self.fixture = love.physics.newFixture(body, self.shape)
+    self.fixture:setCategory(FixtureCategory.feet)
     self.fixture:setSensor(true)
 
     self.fixture:setUserData(self)
