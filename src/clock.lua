@@ -7,17 +7,25 @@ knight.module("Game")
     end
   end)
 
+  event:on("victory", function()
+    highscores:submit(clock.time)
+  end)
+
   function clock:freeze()
     clock.frozen = true
   end
 
-  function clock:text()
-    local decimal = math.floor(self.time * 10) % 10
-    local seconds = math.floor(self.time) % 60
-    local minutes = math.floor(self.time / 60) % 60
-    local hours = math.floor(self.time / 60 / 60)
+  function clock.format(time)
+    local decimal = math.floor(time * 10) % 10
+    local seconds = math.floor(time) % 60
+    local minutes = math.floor(time / 60) % 60
+    local hours = math.floor(time / 60 / 60)
 
     return string.format("%.2i:%.2i.%.1i", minutes, seconds, decimal)
+  end
+
+  function clock:text()
+    return self.format(self.time)
   end
 
   return clock

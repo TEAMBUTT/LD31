@@ -4,11 +4,14 @@ knight.module("Game")
 
   local scores = null
 
-  local function fetch()
-    event:trigger("highscores", {"1:13", "1:16", "2:30", "3:41"})
+  function highscores:submit(time)
+    -- blocking... but the API is evented, so we could fix this someday
+    local http = require("socket.http")
+    local b, c, h = http.request("http://localhost:9292/scores", "time=" .. time)
+    if c == 200 then
+      event:trigger("highscores", b)
+    end
   end
-
-  event:on("load", fetch)
 
   return highscores
 end)

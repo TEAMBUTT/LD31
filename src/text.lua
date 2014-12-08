@@ -22,14 +22,8 @@ knight.module("Game")
     end
   end)
 
-  event:on("highscores", function(scores)
-    local s = ""
-    for i, v in ipairs(scores) do
-      s = s .. i .. " ASS: " .. v .. "\n"
-    end
-    s = s .. 34 .. " YOU: " .. "4:12" .. "\n"
-    s = s .. 245 .. " ASS: " .. "23:00:12" .. "\n"
-    top_text = s
+  event:on("highscores", function(text)
+    top_text = text
   end)
 
   event:on("draw_overlay", function()

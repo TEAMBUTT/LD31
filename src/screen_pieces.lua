@@ -17,6 +17,12 @@ function(Entity, world, palette, player, event, AnimationCollection)
   ScreenPiece.total = 0
   ScreenPiece.collected = 0
 
+  event:on("piece_collected", function(collected, total)
+    if collected == total then
+      event:trigger("victory")
+    end
+  end)
+
   function ScreenPiece:initialize(x, y)
     ScreenPiece.total = ScreenPiece.total + 1
 
