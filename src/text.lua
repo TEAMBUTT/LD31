@@ -8,7 +8,7 @@ knight.module("Game")
 
   local messages = {
     "The screen is broken! I can barely see!\n\nCOLLECT THE BROKEN SCREEN PIECES",
-    "I can see a bit better now.\n\nMOAR SCREEN PIECES"
+    "I can see a bit better now.\n\nFIND THE REST OF THE BROKEN SCREEN PIECES"
   }
   local top_text = messages[1]
 
@@ -16,14 +16,14 @@ knight.module("Game")
     if messages[collected + 1] then
       top_text = messages[collected + 1]
     elseif total == collected then
-      top_text = "You win.\n\nCONGRATULATIONS!"
+      top_text = "I can see properly again!\n\nTHANK YOU FOR FINDING ALL THE PIECES OF THE SCREEN!"
     else
       top_text = "Just " .. (total - collected) .. " more to go!"
     end
   end)
 
   event:on("highscores", function(text)
-    top_text = "You win.\n\nHIGH SCORES\n" .. text
+    top_text = "You win.\n\nGLOBAL INTERNET HIGH SCORES\n" .. text
   end)
 
   event:on("draw_overlay", function()
