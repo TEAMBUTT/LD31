@@ -19,26 +19,30 @@ FixtureCategory = {
   ghost_wall = 6
 }
 
-require 'src.event_listener'
-require 'src.event'
-require 'src.world'
-require 'src.palette'
-require 'src.player'
-require 'src.entity'
-require 'src.map'
-require 'src.platform'
-require 'src.floaty_platform'
-require 'src.badguy'
-require 'src.screen_pieces'
-require 'src.images'
-require 'src.animation_collection'
-require 'src.feet'
-require 'src.darkness'
-require 'src.text'
-require 'src.slope'
-require 'src.window'
-require 'src.audio'
-require 'src.ghost_wall'
+_.each({
+ 'event_listener',
+ 'event',
+ 'world',
+ 'palette',
+ 'player',
+ 'entity',
+ 'map',
+ 'platform',
+ 'floaty_platform',
+ 'badguy',
+ 'screen_pieces',
+ 'images',
+ 'animation_collection',
+ 'feet',
+ 'darkness',
+ 'text',
+ 'slope',
+ 'window',
+ 'audio',
+ 'ghost_wall'
+}, function(dep)
+  require('src.' .. dep)
+end)
 
 local width, height = 512, 376
 local scale = 2
