@@ -42,6 +42,7 @@ _.each({
  'ghost_wall',
  'highscores',
  'clock'
+ 'puff'
 }, function(dep)
   require('src.' .. dep)
 end)
