@@ -12,12 +12,12 @@ knight.module("Game")
   end
 
   function clock:text()
-    local milliseconds = math.floor(self.time * 1000) % 1000
+    local decimal = math.floor(self.time * 10) % 10
     local seconds = math.floor(self.time) % 60
     local minutes = math.floor(self.time / 60) % 60
     local hours = math.floor(self.time / 60 / 60)
 
-    return string.format("%.2i:%.2i.%.3i", minutes, seconds, milliseconds)
+    return string.format("%.2i:%.2i.%.1i", minutes, seconds, decimal)
   end
 
   return clock
