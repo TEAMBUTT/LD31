@@ -16,7 +16,7 @@ knight.module("Game")
     if messages[collected + 1] then
       top_text = messages[collected + 1]
     elseif total == collected then
-      top_text = "You win. I guess."
+      top_text = "You win.\n\nCONGRATULATIONS!"
     else
       top_text = "Just " .. (total - collected) .. " more to go!"
     end
