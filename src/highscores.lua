@@ -7,7 +7,7 @@ knight.module("Game")
   function highscores:submit(time)
     -- blocking... but the API is evented, so we could fix this someday
     local http = require("socket.http")
-    local b, c, h = http.request("http://localhost:9292/scores", "time=" .. time)
+    local b, c, h = http.request("https://calm-hollows-4145.herokuapp.com/scores", "time=" .. time)
     if c == 200 then
       event:trigger("highscores", b)
     end
