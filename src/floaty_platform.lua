@@ -7,7 +7,7 @@ knight
     Platform.initialize(self, x*8, y*8, width*8, 8)
   end
 
-  function FloatyPlatform:color() return palette.brown end
+  function FloatyPlatform:color() return palette.grey3 end
 
   return FloatyPlatform
 end)
