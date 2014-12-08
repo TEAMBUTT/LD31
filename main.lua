@@ -39,7 +39,9 @@ _.each({
  'slope',
  'window',
  'audio',
- 'ghost_wall'
+ 'ghost_wall',
+ 'highscores',
+ 'clock'
 }, function(dep)
   require('src.' .. dep)
 end)

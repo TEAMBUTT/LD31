@@ -1,5 +1,5 @@
 knight.module("Game")
-.component("text", {"event", "palette"}, function(event, palette)
+.component("text", {"event", "palette", "clock"}, function(event, palette, clock)
   local font = love.graphics.newImageFont("gfx/imagefont.png",
     " abcdefghijklmnopqrstuvwxyz" ..
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ0" ..
@@ -22,10 +22,22 @@ knight.module("Game")
     end
   end)
 
+  event:on("highscores", function(scores)
+    local s = ""
+    for i, v in ipairs(scores) do
+      s = s .. i .. " ASS: " .. v .. "\n"
+    end
+    s = s .. 34 .. " YOU: " .. "4:12" .. "\n"
+    s = s .. 245 .. " ASS: " .. "23:00:12" .. "\n"
+    top_text = s
+  end)
+
   event:on("draw_overlay", function()
     love.graphics.setColor(palette.white)
     love.graphics.setFont(font)
     love.graphics.printf(top_text, 0, 50, 512, "center")
+
+    love.graphics.printf(clock:text(), 0, 0, 512, "right")
   end)
 end)
 
