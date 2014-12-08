@@ -18,7 +18,7 @@ knight.module("Game")
     elseif total == collected then
       top_text = "I can see properly again!\n\nTHANK YOU FOR FINDING ALL THE PIECES OF THE SCREEN!"
     else
-      top_text = "Just " .. (total - collected) .. " more to go!"
+      top_text = "Keep collecting!\n\nONLY " .. (total - collected) .. " MORE TO Go!"
     end
   end)
 
