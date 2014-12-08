@@ -94,7 +94,9 @@ function(event, world, palette, Entity, AnimationCollection, Feet, Puff)
   function Player:jump()
     if self.feet:on_ground() then
       self.body:applyLinearImpulse(0, -5)
-      Puff:new(self.body:getWorldCenter())
+      x, y = self.body:getWorldCenter()
+      Puff:new(x, y, "left")
+      Puff:new(x, y, "right")
       event:trigger("jump")
     end
   end

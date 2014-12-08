@@ -4,19 +4,28 @@ knight.module("Game")
 function(Entity, world, event, palette)
   local Puff = class("Puff", Entity)
 
-  function Puff:initialize(x, y)
+  function Puff:initialize(x, y, direction)
     Entity.initialize(self)
+    p({x, y, direction})
 
     self.body = love.physics.newBody(world, x, y, "dynamic")
     -- self.body:setLinearDamping(10)
 
-    self.shape = love.physics.newCircleShape(3)
+    self.shape = love.physics.newCircleShape(2.5)
 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1)
     self.fixture:setCategory(FixtureCategory.effect)
     self.fixture:setMask(unpack(_.reject(_.values(FixtureCategory), function(category)
       return category == FixtureCategory.wall
     end)))
+
+    local vx = 100
+    local vy = -30
+    if direction == "right" then
+      self.body:setLinearVelocity(vx, vy)
+    else
+      self.body:setLinearVelocity(-vx, vy)
+    end
 
     self:bind_events()
   end
