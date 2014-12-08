@@ -50,8 +50,8 @@ knight.module("Game")
     if self.dx > dt then
       self.dx = self.dx - dt
 
-      if distance <= darkness.radius * 2 then
-        local v = 200
+      if distance <= darkness.radius * 1.2 then
+        local v = 100
 
         if x1 < x2 then
           self.anim:set("left")

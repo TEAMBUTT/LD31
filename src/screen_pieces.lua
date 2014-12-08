@@ -31,6 +31,7 @@ function(Entity, world, palette, event, AnimationCollection)
     self.body = love.physics.newBody(world, x, y, "dynamic")
     self.body:setFixedRotation(true)
     self.body:setLinearDamping(1)
+    self.body:setGravityScale(0)
 
     self.shape = love.physics.newPolygonShape(unpack(shape_coordinates))
 
