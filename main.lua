@@ -29,6 +29,7 @@ require 'darkness'
 require 'text'
 require 'slope'
 require 'window'
+require 'audio'
 
 local width, height = 512, 376
 local scale = 2
