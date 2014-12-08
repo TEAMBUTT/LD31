@@ -1,5 +1,5 @@
 knight.module("Game")
-.component("BadGuy", {"world", "Entity", "palette", "player", "AnimationCollection", "darkness"}, function(world, Entity, palette, player, AnimationCollection, darkness)
+.component("BadGuy", {"event", "world", "Entity", "palette", "player", "AnimationCollection", "darkness"}, function(event, world, Entity, palette, player, AnimationCollection, darkness)
   local shape_coordinates = _.map({
     0, 1,
     2, 1,
@@ -62,6 +62,7 @@ knight.module("Game")
   function BadGuy:start_contact(other, contact)
     if other.class.name == "Player" then
       other:bump({contact:getNormal()})
+      event:trigger("bump")
     end
   end
 
