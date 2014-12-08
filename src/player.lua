@@ -3,12 +3,12 @@ knight.module("Game")
   local Player = class('Player', Entity)
 
   local shape_coordinates = _.map({
-    0, 1,
-    1, 0.75,
-    2, 1,
-    2, 3,
-    1, 4,
-    0, 3
+    0,    1.5,
+    1,    0.75,
+    2,    1.5,
+    1.75, 3,
+    1,    4,
+    0.25, 3
   }, function(x) return x * 4 end)
 
   function Player:initialize()
@@ -50,10 +50,10 @@ knight.module("Game")
     self.anim:play()
     if love.keyboard.isDown("right") then
       self.direction = "right"
-      self.body:applyForce(15, 0)
+      self.body:applyForce(11, 0)
     elseif love.keyboard.isDown("left") then
       self.direction = "left"
-      self.body:applyForce(-15, 0)
+      self.body:applyForce(-11, 0)
     else
       self.anim:stop()
     end
@@ -65,7 +65,7 @@ knight.module("Game")
     end
 
     if love.keyboard.isDown("up") then
-      self.body:applyForce(0, -5)
+      self.body:applyForce(0, -7)
     end
   end
 
@@ -91,7 +91,7 @@ knight.module("Game")
 
   function Player:jump()
     if self.feet:on_ground() then
-      self.body:applyLinearImpulse(0, -6)
+      self.body:applyLinearImpulse(0, -5)
     end
   end
 
