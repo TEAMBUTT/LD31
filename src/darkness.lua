@@ -11,8 +11,12 @@ knight.module("Game")
   local t = tween.new(1, darkness, {}, tween.easing.linear)
   event:on("update", function(dt) t:update(dt) end)
 
-  event:on("piece_collected", function(count)
-    t = tween.new(2, darkness, {radius=desired_radius(count)}, tween.easing.inOutQuad)
+  event:on("piece_collected", function(collected, total)
+    if collected == total then
+      t = tween.new(20, darkness, {radius=1024}, tween.easing.inOutQuad)
+    else
+      t = tween.new(2, darkness, {radius=desired_radius(collected)}, tween.easing.inOutQuad)
+    end
   end)
 
   local darkness_stencil = function()
