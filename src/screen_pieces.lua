@@ -1,8 +1,8 @@
 knight
 .module("Game")
 .component("ScreenPiece",
-{"Entity", "world", "palette", "player", "event"},
-function(Entity, world, palette, player, event)
+{"Entity", "world", "palette", "player", "event", "AnimationCollection"},
+function(Entity, world, palette, player, event, AnimationCollection)
   local shape_coordinates = _.map({
     0, 1,
     1, 0,
@@ -10,7 +10,7 @@ function(Entity, world, palette, player, event)
     2, 2,
     1, 3,
     0, 2
-  }, function(x) return x * 6 end)
+  }, function(x) return x * 4 end)
 
   local ScreenPiece = class("ScreenPiece", Entity)
 
@@ -30,10 +30,15 @@ function(Entity, world, palette, player, event)
 
     self.fixture = love.physics.newFixture(self.body, self.shape, 1)
     self.fixture:setUserData(self)
+
     self:on("destroy", function()
       self.fixture:destroy()
       self.body:destroy()
     end)
+
+    self.anim = AnimationCollection:new({
+      spin="screen_piece.png"
+    }, 16, 16, 0.05)
 
     self:bind_events()
   end
@@ -53,11 +58,14 @@ function(Entity, world, palette, player, event)
   end
 
   function ScreenPiece:update(dt)
+    self.anim:update(dt)
+    self.anim:play()
   end
 
   function ScreenPiece:draw()
-    love.graphics.setColor(unpack(palette.violet))
-    love.graphics.polygon('fill', self.body:getWorldPoints(self.shape:getPoints()))
+    local x, y = self.body:getWorldCenter()
+    love.graphics.setColor(unpack(palette.lightblue))
+    self.anim:draw(math.floor(x-8), math.floor(y-9))
   end
 
   return ScreenPiece
