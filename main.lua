@@ -16,7 +16,8 @@ FixtureCategory = {
   bad_guy = 3,
   piece = 4,
   wall = 5,
-  ghost_wall = 6
+  ghost_wall = 6,
+  effect = 7
 }
 
 _.each({

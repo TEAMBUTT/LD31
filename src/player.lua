@@ -1,5 +1,7 @@
 knight.module("Game")
-.component("player", {"event", "world", "palette", "Entity", "AnimationCollection", "Feet"}, function(event, world, palette, Entity, AnimationCollection, Feet)
+.component("player",
+{"event", "world", "palette", "Entity", "AnimationCollection", "Feet", "Puff"},
+function(event, world, palette, Entity, AnimationCollection, Feet, Puff)
   local Player = class('Player', Entity)
 
   local shape_coordinates = _.map({
@@ -92,6 +94,7 @@ knight.module("Game")
   function Player:jump()
     if self.feet:on_ground() then
       self.body:applyLinearImpulse(0, -5)
+      Puff:new(self.body:getWorldCenter())
       event:trigger("jump")
     end
   end
