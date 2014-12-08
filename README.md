@@ -1,3 +1,3 @@
 # TEAMBUTT LUDUM DARE 31 ENTRY
 
-__Warning: This shit is currently fucked.__
+[Entry Page](http://ludumdare.com/compo/ludum-dare-31/?action=preview&uid=45526)
