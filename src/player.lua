@@ -92,8 +92,8 @@ knight.module("Game")
   function Player:jump()
     if self.feet:on_ground() then
       self.body:applyLinearImpulse(0, -5)
+      event:trigger("jump")
     end
-    event:trigger("jump")
   end
 
   return Player:new()
