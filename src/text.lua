@@ -23,7 +23,7 @@ knight.module("Game")
   end)
 
   event:on("highscores", function(text)
-    top_text = text
+    top_text = "You win.\n\nHIGH SCORES\n" .. text
   end)
 
   event:on("draw_overlay", function()
