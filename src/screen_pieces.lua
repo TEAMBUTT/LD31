@@ -1,8 +1,8 @@
 knight
 .module("Game")
 .component("ScreenPiece",
-{"Entity", "world", "palette", "player", "event", "AnimationCollection"},
-function(Entity, world, palette, player, event, AnimationCollection)
+{"Entity", "world", "palette", "event", "AnimationCollection"},
+function(Entity, world, palette, event, AnimationCollection)
   local shape_coordinates = _.map({
     0, 1,
     1, 0,
@@ -56,7 +56,7 @@ function(Entity, world, palette, player, event, AnimationCollection)
   end
 
   function ScreenPiece:contact(other, contact)
-    if other == player then
+    if other.class.name == "Player" then
       ScreenPiece.collected = ScreenPiece.collected + 1
       event:trigger("piece_collected", ScreenPiece.collected, ScreenPiece.total)
       self:destroy()
